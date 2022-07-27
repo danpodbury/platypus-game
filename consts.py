@@ -13,7 +13,7 @@ class Animal(Enum):
     Wombat = 2
     Platypus = 3
 
-animal_array = [Animal.Emu, Animal.Emu,
+animal_array = [Animal.Kangaroo, Animal.Kangaroo,
                 Animal.Emu, Animal.Emu,
                 Animal.Wombat, Animal.Wombat,
                 Animal.Platypus, Animal.Platypus]

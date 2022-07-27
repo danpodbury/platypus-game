@@ -3,15 +3,12 @@ import consts
 
 
 class Board:
-    size: int = consts.board_size
-    state: List[consts.Color] = []
-
     def __init__(self):
-        self.state = [consts.Color.Yellow] * self.size
+        self.cells: List[consts.Color] = [consts.Color.Yellow] * consts.board_size
 
     def print_board(self):
         string = ""
-        for char in self.state:
+        for char in self.cells:
             s = "Y" if char == consts.Color.Yellow else "G"
             string += s
         print(string)
