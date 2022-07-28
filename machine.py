@@ -4,13 +4,18 @@ import random
 import consts
 
 class Machine:
-    def __init__(self, name: str):
+    def __init__(self, name: str, table: List[List[str]] = []):
         self.state_table: List[consts.Color] = []
         self.position: int = 11
         self.animal: consts.Animal = consts.Animal.Kangaroo
         self.name: str = name
-        self.score:int = 0
+        self.score: int = 0
         self.init_random_table()
+
+        if table == []:
+            self.init_random_table()
+        else:
+            self.load_table(table)
 
     def init_random_table(self):
         for i in range(7):
@@ -23,6 +28,32 @@ class Machine:
                 col.append(random.choice(list(consts.Plant)))
 
             self.state_table.append(col)
+
+    def load_table(self, table):
+        # convert colors
+        color_rows = [0,2]
+        for n in color_rows:
+            for i in range(7):
+                table[i][n] = consts.Color.Yellow if table[i][n] == 'y' else consts.Color.Green
+
+        animal_rows = [1, 3]
+        # convert animals
+        for n in animal_rows:
+            for i in range(7):
+                if (table[i][n] == 'k'):
+                    table[i][n] = consts.Animal.Kangaroo
+                if (table[i][n] == 'e'):
+                    table[i][n] = consts.Animal.Emu
+                if (table[i][n] == 'w'):
+                    table[i][n] = consts.Animal.Wombat
+                if (table[i][n] == 'p'):
+                    table[i][n] = consts.Animal.Platypus
+
+        # convert plant
+        for i in range(7):
+            table[i][4] = consts.Plant.GumTree if table[i][4] == 'gg' else consts.Plant.Wattle
+
+        self.table = table
 
     def print_table(self):
         for j in range(5):
@@ -48,11 +79,6 @@ class Machine:
                     decision.append(">") 
                 break
 
-        if (decision == []):
-            # the only reason decision is empty here is if we've match a green 
-            # platypus which doesn't exist in the table, so we append it here
-            #decision = [consts.Color.Green, consts.Animal.Platypus, "X"]
-            pass
         return decision
 
     def move_right(self):
@@ -66,5 +92,4 @@ class Machine:
             self.position = consts.board_size - 1
 
     def render_animal(self):
-        #print("===>" + str(self.animal))
         return str(self.animal)[len("Animal."):len("Animal.")+1]
