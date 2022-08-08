@@ -88,4 +88,6 @@ def run_single_match():
     print("p1: " + str(machines[0].score) + ", p2: " +  str(machines[1].score))
 
 def run_tournament(machines):
-    print(len(machines))
+    for i in range(268):
+        for j in range(i+1, 268):
+            pass
