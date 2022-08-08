@@ -2,7 +2,7 @@ from typing import List
 import machine
 
 def extract_machines(filename: str) -> List[machine.Machine]:
-    print("extracting machines from file...")
+    print("Extracting machines from file...")
 
     machines: List[machine.Machine] = []
 

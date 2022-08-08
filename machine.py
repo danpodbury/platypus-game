@@ -12,6 +12,10 @@ class Machine:
         self.score: int = 0
         self.init_random_table()
 
+        self.total_wins = 0
+        self.total_points_for = 0
+        self.total_points_against = 0
+
         if table == []:
             self.init_random_table()
         else:
@@ -54,6 +58,11 @@ class Machine:
             table[i][4] = consts.Plant.GumTree if table[i][4] == 'gg' else consts.Plant.Wattle
 
         self.table = table
+
+    def reset(self):
+        self.animal = consts.Animal.Kangaroo
+        self.score = 0
+        self.position = 11
 
     def print_table(self):
         for j in range(5):
