@@ -10,7 +10,6 @@ class Machine:
         self.animal: consts.Animal = consts.Animal.Kangaroo
         self.name: str = name
         self.score: int = 0
-        self.init_random_table()
 
         self.total_wins = 0
         self.total_points_for = 0
@@ -34,30 +33,35 @@ class Machine:
             self.state_table.append(col)
 
     def load_table(self, table):
+        # set blank table
+        self.state_table = []
+        for i in range(7):
+            col = [0,0,0,0,0]
+            self.state_table.append(col)
+        
         # convert colors
         color_rows = [0,2]
         for n in color_rows:
             for i in range(7):
-                table[i][n] = consts.Color.Yellow if table[i][n] == 'y' else consts.Color.Green
+                self.state_table[i][n] = consts.Color.Yellow if table[i][n] == 'y' else consts.Color.Green
 
-        animal_rows = [1, 3]
         # convert animals
+        animal_rows = [1, 3]
         for n in animal_rows:
             for i in range(7):
                 if (table[i][n] == 'k'):
-                    table[i][n] = consts.Animal.Kangaroo
+                    self.state_table[i][n] = consts.Animal.Kangaroo
                 if (table[i][n] == 'e'):
-                    table[i][n] = consts.Animal.Emu
+                    self.state_table[i][n] = consts.Animal.Emu
                 if (table[i][n] == 'w'):
-                    table[i][n] = consts.Animal.Wombat
+                    self.state_table[i][n] = consts.Animal.Wombat
                 if (table[i][n] == 'p'):
-                    table[i][n] = consts.Animal.Platypus
+                    self.state_table[i][n] = consts.Animal.Platypus
 
         # convert plant
         for i in range(7):
-            table[i][4] = consts.Plant.GumTree if table[i][4] == 'gg' else consts.Plant.Wattle
+            self.state_table[i][4] = consts.Plant.GumTree if table[i][4] == 'gg' else consts.Plant.Wattle
 
-        self.table = table
 
     def reset(self):
         self.animal = consts.Animal.Kangaroo

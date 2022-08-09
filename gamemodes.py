@@ -35,7 +35,7 @@ def run_single_match(m1: machine.Machine, m2: machine.Machine, printing=True):
 
     # Enter Game Loop
     max_iter = 100
-    playing:bool = True    
+    playing = True    
     while playing:
 
         # Begin turn
@@ -109,11 +109,11 @@ def run_tournament(machines: List[machine.Machine]):
             [i_score, j_score] = run_single_match(machines[i], machines[j], printing=False)
 
             # update total score
-            machines[i].total_points_for = i_score
-            machines[i].total_points_against = j_score
+            machines[i].total_points_for += i_score
+            machines[i].total_points_against += j_score
 
-            machines[j].total_points_for = j_score
-            machines[j].total_points_against = i_score           
+            machines[j].total_points_for += j_score
+            machines[j].total_points_against += i_score           
 
             # update total wins
             if (i_score > j_score):
